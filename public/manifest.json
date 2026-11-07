@@ -1,0 +1,19 @@
+{
+  "name": "SimpleTax LK - IRD Sri Lanka",
+  "short_name": "SimpleTax LK",
+  "description": "Official Sri Lanka Inland Revenue Citizen Portal for TIN Registration and Tax Services",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1b663e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/sri-lanka-emblem.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

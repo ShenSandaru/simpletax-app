@@ -57,35 +57,37 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Main Clean Navigation Bar */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
         {/* Emblem & Portal Title */}
         <button
           onClick={() => setCurrentRoute('/')}
-          className="flex items-center gap-3 text-left focus:outline-none cursor-pointer group"
+          className="flex items-center gap-2.5 sm:gap-3 text-left focus:outline-none cursor-pointer group shrink min-w-0"
         >
-          <div className="w-11 h-11 relative flex items-center justify-center shrink-0">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 relative flex items-center justify-center shrink-0">
             <Image
               src="/sri-lanka-emblem.svg"
               alt="Official Government Emblem of Sri Lanka"
-              width={44}
-              height={44}
-              className="object-contain drop-shadow-xs"
+              width={40}
+              height={40}
+              className="object-contain drop-shadow-xs w-8 h-8 sm:w-10 sm:h-10"
               priority
             />
           </div>
-          <div>
-            <span className="font-bold text-base sm:text-lg text-slate-900 leading-tight block group-hover:text-emerald-900 transition">
+          <div className="truncate">
+            <span className="font-bold text-sm sm:text-base text-slate-900 leading-tight block group-hover:text-emerald-900 transition truncate">
               {t.deptName}
             </span>
-            <span className="text-xs text-slate-500 font-medium">{t.deptSub}</span>
+            <span className="text-[11px] sm:text-xs text-slate-500 font-medium block truncate">
+              {t.deptSub}
+            </span>
           </div>
         </button>
 
         {/* Direct Action Navigation */}
-        <nav className="flex items-center gap-1.5">
+        <nav className="flex items-center gap-1 sm:gap-1.5 shrink-0">
           <button
             onClick={() => setCurrentRoute('/')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
               currentRoute === '/'
                 ? 'bg-slate-100 text-slate-900'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -96,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => setCurrentRoute('/get-tin')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+            className={`px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer whitespace-nowrap shadow-xs ${
               currentRoute === '/get-tin'
                 ? 'bg-emerald-800 text-white'
                 : 'bg-emerald-700 hover:bg-emerald-800 text-white'
@@ -107,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => setCurrentRoute('/verify')}
-            className={`hidden sm:inline-flex px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+            className={`hidden md:inline-flex px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
               currentRoute === '/verify'
                 ? 'bg-slate-100 text-slate-900'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -118,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => setCurrentRoute('/quick-pay')}
-            className={`hidden sm:inline-flex px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+            className={`hidden md:inline-flex px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
               currentRoute === '/quick-pay'
                 ? 'bg-slate-100 text-slate-900'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -129,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => setCurrentRoute('/login')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 transition cursor-pointer ${
+            className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 transition cursor-pointer ${
               currentRoute === '/login'
                 ? 'bg-slate-900 text-white border-slate-900'
                 : 'text-slate-700 hover:bg-slate-50'

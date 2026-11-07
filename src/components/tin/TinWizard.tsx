@@ -64,7 +64,7 @@ export const TinWizard: React.FC<TinWizardProps> = ({ lang, notify }) => {
         <p className="text-xs sm:text-sm text-slate-300 mt-1">{t.tinSub}</p>
 
         {/* 3 Step Indicator */}
-        <div className="grid grid-cols-3 gap-2 mt-5">
+        <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mt-5">
           {[
             { num: 1, title: t.step1Title },
             { num: 2, title: t.step2Title },
@@ -72,7 +72,7 @@ export const TinWizard: React.FC<TinWizardProps> = ({ lang, notify }) => {
           ].map((s) => (
             <div
               key={s.num}
-              className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center gap-2 transition ${
+              className={`p-2 sm:p-2.5 rounded-xl border text-[11px] sm:text-xs font-semibold flex items-center gap-1.5 sm:gap-2 transition ${
                 tinStep === s.num
                   ? 'bg-emerald-950/60 border-emerald-600 text-white'
                   : tinStep > s.num
@@ -81,7 +81,7 @@ export const TinWizard: React.FC<TinWizardProps> = ({ lang, notify }) => {
               }`}
             >
               <span
-                className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 ${
+                className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center text-[10px] sm:text-[11px] font-bold shrink-0 ${
                   tinStep >= s.num ? 'bg-emerald-700 text-white' : 'bg-slate-700 text-slate-400'
                 }`}
               >
