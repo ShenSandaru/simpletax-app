@@ -2,7 +2,7 @@ export const TRANSLATIONS = {
   en: {
     govBanner: 'Official Digital Portal of the Government of Sri Lanka',
     deptName: 'Department of Inland Revenue',
-    deptSub: 'e-Services & Citizen Portal • IRD.GOV.LK',
+    deptSub: 'e-Services & Citizen Portal',
     navHome: 'Home',
     navGetTin: 'Register TIN',
     navVerify: 'Verify TIN',
@@ -39,7 +39,7 @@ export const TRANSLATIONS = {
   si: {
     govBanner: 'ශ්‍රී ලංකා රජයේ නිල ඩිජිටල් බදු ද්වාරය',
     deptName: 'දේශීය ආදායම් දෙපාර්තමේන්තුව',
-    deptSub: 'විද්‍යුත් බදු සහ පුරවැසි සේවා ද්වාරය • IRD.GOV.LK',
+    deptSub: 'විද්‍යුත් බදු සහ පුරවැසි සේවා ද්වාරය',
     navHome: 'මුල් පිටුව',
     navGetTin: 'TIN ලියාපදිංචිය',
     navVerify: 'TIN පරීක්ෂාව',
@@ -76,7 +76,7 @@ export const TRANSLATIONS = {
   ta: {
     govBanner: 'இலங்கை அரசாங்கத்தின் அதிகாரப்பூர்வ டிஜிட்டல் தளம்',
     deptName: 'உள்நாட்டு இறைவரித் திணைக்களம்',
-    deptSub: 'மின்-சேவைகள் மற்றும் குடிமக்கள் தளம் • IRD.GOV.LK',
+    deptSub: 'மின்-சேவைகள் மற்றும் குடிமக்கள் தளம்',
     navHome: 'முகப்பு',
     navGetTin: 'TIN பதிவு',
     navVerify: 'TIN சரிபார்ப்பு',

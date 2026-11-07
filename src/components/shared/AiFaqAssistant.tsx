@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, Sparkles, User, HelpCircle, PhoneCall } from 'lucide-react';
+import { Bot, X, Send, Sparkles, User, HelpCircle, PhoneCall, Globe } from 'lucide-react';
 import { LangKey } from '@/types';
 
 interface AiFaqModalProps {
   lang: LangKey;
+  onLanguageChange?: (lang: LangKey) => void;
   isOpen: boolean;
   onClose: () => void;
   onNavigateToTin: () => void;
@@ -75,21 +76,52 @@ const FAQ_KNOWLEDGE: Record<LangKey, { prompt: string; answer: string }[]> = {
 
 export const AiFaqAssistant: React.FC<AiFaqModalProps> = ({
   lang,
+  onLanguageChange,
   isOpen,
   onClose,
   onNavigateToTin
 }) => {
+  // Local language state allowing instant switching inside chat while keeping parent in sync
+  const [chatLang, setChatLang] = useState<LangKey>(lang);
+
+  // Sync if parent lang changes externally
+  useEffect(() => {
+    setChatLang(lang);
+  }, [lang]);
+
+  const getGreeting = (selectedLang: LangKey) => {
+    switch (selectedLang) {
+      case 'si':
+        return 'ආයුබෝවන්! මම දේශීය ආදායම් දෙපාර්තමේන්තුවේ AI සහායකයා. TIN අංකය හෝ බදු සේවා පිළිබඳ ඕනෑම ගැටලුවක් පහතින් තෝරන්න හෝ විමසන්න.';
+      case 'ta':
+        return 'வணக்கம்! நான் IRD இன் AI உதவியாளர். TIN பதிவு அல்லது வரி சேவைகள் பற்றிய உங்கள் கேள்விகளை கீழே கேட்கலாம்.';
+      default:
+        return 'Hello! I am your IRD AI Assistant. How can I help you with your TIN registration or tax questions today?';
+    }
+  };
+
   const [messages, setMessages] = useState<Message[]>([
     {
       sender: 'ai',
-      text:
-        lang === 'si'
-          ? 'ආයුබෝවන්! මම දේශීය ආදායම් දෙපාර්තමේන්තුවේ AI සහායකයා. TIN අංකය හෝ බදු සේවා පිළිබඳ ඕනෑම ගැටලුවක් පහතින් තෝරන්න හෝ විමසන්න.'
-          : lang === 'ta'
-          ? 'வணக்கம்! நான் IRD இன் AI உதவியாளர். TIN பதிவு அல்லது வரி சேவைகள் பற்றிய உங்கள் கேள்விகளை கீழே கேட்கலாம்.'
-          : 'Hello! I am your IRD AI Assistant. How can I help you with your TIN registration or tax questions today?'
+      text: getGreeting(lang)
     }
   ]);
+
+  // When user selects a new language in the chatbot
+  const handleSelectLang = (newLang: LangKey) => {
+    setChatLang(newLang);
+    if (onLanguageChange) {
+      onLanguageChange(newLang);
+    }
+    // Add welcome / switch message in that language
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: 'ai',
+        text: getGreeting(newLang)
+      }
+    ]);
+  };
 
   const [inputVal, setInputVal] = useState('');
   const chatBottomRef = useRef<HTMLDivElement>(null);
@@ -100,7 +132,7 @@ export const AiFaqAssistant: React.FC<AiFaqModalProps> = ({
 
   if (!isOpen) return null;
 
-  const currentFaqs = FAQ_KNOWLEDGE[lang] || FAQ_KNOWLEDGE.en;
+  const currentFaqs = FAQ_KNOWLEDGE[chatLang] || FAQ_KNOWLEDGE.en;
 
   const handleSend = (textToSend?: string) => {
     const text = (textToSend || inputVal).trim();
@@ -125,9 +157,9 @@ export const AiFaqAssistant: React.FC<AiFaqModalProps> = ({
         reply = currentFaqs[3].answer;
       } else {
         reply =
-          lang === 'si'
+          chatLang === 'si'
             ? 'ඔබගේ TIN අංකය ක්ෂණිකව ලබාගැනීමට ඉහත "TIN ලබාගන්න" බොත්තම ඔබන්න. වැඩිදුර සහාය සඳහා IRD ඇමතුම් මධ්‍යස්ථානය 1944 අමතන්න.'
-            : lang === 'ta'
+            : chatLang === 'ta'
             ? 'உங்கள் TIN எண்ணை உடனடியாகப் பெற "TIN பதிவு செய்க" என்பதை அழுத்தவும். மேலதிக தகவலுக்கு 1944 ஐ அழைக்கவும்.'
             : 'You can register for your TIN in 2 minutes directly on this portal. For detailed personal inquiries, you may also call the IRD hotline at 1944.';
       }
@@ -159,6 +191,46 @@ export const AiFaqAssistant: React.FC<AiFaqModalProps> = ({
           >
             <X className="w-5 h-5" />
           </button>
+        </div>
+
+        {/* 1st: Language Selection Bar (Sinhala, Tamil, English) */}
+        <div className="px-4 py-2.5 bg-emerald-950/20 border-b border-emerald-900/10 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+            <Globe className="w-3.5 h-3.5 text-emerald-700" />
+            <span>භාෂාව / மொழி / Language:</span>
+          </div>
+          <div className="inline-flex rounded-xl bg-slate-100 p-0.5 border border-slate-200">
+            <button
+              onClick={() => handleSelectLang('si')}
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                chatLang === 'si'
+                  ? 'bg-emerald-800 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              සිංහල
+            </button>
+            <button
+              onClick={() => handleSelectLang('ta')}
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                chatLang === 'ta'
+                  ? 'bg-emerald-800 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              தமிழ்
+            </button>
+            <button
+              onClick={() => handleSelectLang('en')}
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                chatLang === 'en'
+                  ? 'bg-emerald-800 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              English
+            </button>
+          </div>
         </div>
 
         {/* Quick FAQ Suggestion Pills */}
@@ -232,9 +304,9 @@ export const AiFaqAssistant: React.FC<AiFaqModalProps> = ({
               if (e.key === 'Enter') handleSend();
             }}
             placeholder={
-              lang === 'si'
+              chatLang === 'si'
                 ? 'ඔබට අවශ්‍ය ප්‍රශ්නය මෙහි ලියන්න...'
-                : lang === 'ta'
+                : chatLang === 'ta'
                 ? 'உங்கள் கேள்வியை உள்ளிடவும்...'
                 : 'Type your question here...'
             }

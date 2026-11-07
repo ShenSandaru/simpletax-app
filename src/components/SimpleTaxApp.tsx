@@ -550,6 +550,7 @@ export default function SimpleTaxApp() {
       {/* AI Assistant Modal for Citizen Tax FAQs */}
       <AiFaqAssistant
         lang={lang}
+        onLanguageChange={(newLang) => setLang(newLang)}
         isOpen={showAiFaqModal}
         onClose={() => setShowAiFaqModal(false)}
         onNavigateToTin={() => setCurrentRoute('/get-tin')}
