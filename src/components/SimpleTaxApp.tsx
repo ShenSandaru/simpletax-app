@@ -14,19 +14,22 @@ import {
   X,
   Search,
   CheckCircle2,
-  FileCheck
+  FileCheck,
+  Bot
 } from 'lucide-react';
 import { LangKey, AppRoute, VerifiedTaxpayer, DocumentModalData } from '@/types';
 import { TRANSLATIONS } from '@/constants/translations';
 import { Navbar } from '@/components/shared/Navbar';
 import { Footer } from '@/components/shared/Footer';
 import { TinWizard } from '@/components/tin/TinWizard';
+import { AiFaqAssistant } from '@/components/shared/AiFaqAssistant';
 
 export default function SimpleTaxApp() {
   const [lang, setLang] = useState<LangKey>('en');
   const [currentRoute, setCurrentRoute] = useState<AppRoute>('/');
   const [toast, setToast] = useState<string | null>(null);
   const [showArchModal, setShowArchModal] = useState(false);
+  const [showAiFaqModal, setShowAiFaqModal] = useState(false);
   const [previewDocModal, setPreviewDocModal] = useState<DocumentModalData | null>(null);
 
   // Search on Hero
@@ -532,6 +535,25 @@ export default function SimpleTaxApp() {
 
       {/* Official Reusable Footer */}
       <Footer lang={lang} onOpenArchModal={() => setShowArchModal(true)} />
+
+      {/* Floating Rounded AI Agent Action Button on the Bottom-Right */}
+      <button
+        onClick={() => setShowAiFaqModal(true)}
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-emerald-800 hover:bg-emerald-700 text-white shadow-xl flex items-center justify-center transition-all transform hover:scale-105 active:scale-95 cursor-pointer border-2 border-white/80 group"
+        aria-label="Open AI Tax Assistant"
+        title="Open IRD AI Tax Assistant"
+      >
+        <Bot className="w-7 h-7 text-emerald-300 group-hover:text-white transition" />
+        <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full animate-pulse" />
+      </button>
+
+      {/* AI Assistant Modal for Citizen Tax FAQs */}
+      <AiFaqAssistant
+        lang={lang}
+        isOpen={showAiFaqModal}
+        onClose={() => setShowAiFaqModal(false)}
+        onNavigateToTin={() => setCurrentRoute('/get-tin')}
+      />
 
       {/* =====================================================================
           DOCUMENT PREVIEW MODAL
