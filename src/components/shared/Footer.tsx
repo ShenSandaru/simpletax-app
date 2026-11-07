@@ -48,11 +48,19 @@ export const Footer: React.FC<FooterProps> = ({ lang, onOpenArchModal }) => {
             href="https://github.com/ShenSandaru"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 transition font-medium cursor-pointer"
+            className="relative inline-flex items-center justify-center p-[1.5px] rounded-xl overflow-hidden group cursor-pointer transition transform hover:scale-[1.03] shadow-xs"
             title="Shen Sandaru GitHub Profile"
           >
-            <span>Proposed by Shen</span>
-            <GithubIcon className="w-3.5 h-3.5 text-slate-700" />
+            {/* Moving Glow Border Line */}
+            <span className="absolute inset-[-1000%] animate-spin-border bg-[conic-gradient(from_90deg_at_50%_50%,#10b981_0%,#34d399_25%,#059669_50%,#34d399_75%,#10b981_100%)] opacity-85 group-hover:opacity-100 blur-[0.5px]" />
+
+            {/* Inner Content Badge */}
+            <span className="relative z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-[10px] bg-slate-900 text-white font-semibold text-xs transition duration-200 group-hover:bg-slate-950">
+              <span className="bg-gradient-to-r from-emerald-200 via-white to-emerald-200 bg-clip-text text-transparent">
+                Proposed by Shen
+              </span>
+              <GithubIcon className="w-3.5 h-3.5 text-emerald-400 group-hover:text-emerald-300 transition" />
+            </span>
           </a>
         </div>
       </div>

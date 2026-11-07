@@ -73,10 +73,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handleNavigate('/get-tin')}
-              className={`px-3.5 py-2 rounded-lg text-xs font-bold transition cursor-pointer whitespace-nowrap shadow-xs ${
+              className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all duration-300 cursor-pointer whitespace-nowrap shadow-[0_0_15px_rgba(16,185,129,0.5)] hover:shadow-[0_0_22px_rgba(52,211,153,0.75)] border border-emerald-400/30 ${
                 currentRoute === '/get-tin'
-                  ? 'bg-emerald-800 text-white'
-                  : 'bg-emerald-700 hover:bg-emerald-800 text-white'
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-emerald-600 hover:bg-emerald-500 text-white'
               }`}
             >
               {t.navGetTin}

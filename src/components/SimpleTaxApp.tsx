@@ -138,9 +138,9 @@ export default function SimpleTaxApp() {
                   <div className="pt-2 flex flex-wrap items-center gap-3">
                     <button
                       onClick={() => setCurrentRoute('/get-tin')}
-                      className="px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-sm flex items-center gap-2 transition cursor-pointer"
+                      className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-[0_0_20px_rgba(16,185,129,0.55)] hover:shadow-[0_0_28px_rgba(52,211,153,0.8)] border border-emerald-400/40 flex items-center gap-2 transition-all duration-300 cursor-pointer transform hover:-translate-y-0.5"
                     >
-                      <UserCheck className="w-4 h-4" />
+                      <UserCheck className="w-4 h-4 text-emerald-100" />
                       <span>{t.svc1Action}</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
